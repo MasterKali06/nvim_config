@@ -11,11 +11,14 @@ vim.g.mapleader = " "
 -- nvim-tree toggle
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
 
+-- Horizontal terminal
+vim.keymap.set('n', '<leader>y', '<Cmd>ToggleTerm direction=horizontal size=10<CR>')
 
-vim.keymap.set('n', '<leader>t<Right>', ':vert rightbelow 50vsplit | terminal<CR>', { noremap = true, silent = true })
+-- Vertical terminal
+vim.keymap.set('n', '<leader>t', '<Cmd>ToggleTerm direction=vertical size=50<CR>')
 
-
-vim.keymap.set('n', '<leader>t<Down>', ':botright 10split | terminal<CR>', { noremap = true, silent = true })
+-- close terminal
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
 -- window navigatio
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Go to left window" })

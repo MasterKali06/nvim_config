@@ -122,5 +122,25 @@ return {
   {
     'abecodes/tabout.nvim',
     config = true,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require('toggleterm').setup({
+        terminal_mappings = true,
+      })
+    end
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function()
+      require('lualine').setup()
+    end
   }
 }
