@@ -35,7 +35,8 @@ return {
 
     vim.lsp.enable({
       "ts_ls",
-      "lua_ls"
+      "lua_ls",
+      "pyright"
     })
 
 
@@ -52,5 +53,25 @@ return {
         "typescript.tsx"
       },
     })
+
+    vim.lsp.config('pyright', {
+      capabilities = capabilities
+    })
+
+    vim.lsp.config('lua_ls', {
+      capabilities = capabilities
+    })
+
+    -- documentation config
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = "rounded",
+        title = " Documentation ",
+        title_pos = "center",
+      }
+    )
+
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#1e222a' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#61afef', bg = '#1e222a' })
   end
 }

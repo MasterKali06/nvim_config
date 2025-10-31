@@ -38,7 +38,7 @@ return {
           typescript = { "prettier" },
           typescriptreact = { "prettier" },
           lua = { "stylua" },
-          python = { "black" }
+          python = { "black", "isort" }
         },
         format_on_save = {
           timeout_ms = 500,
@@ -64,15 +64,30 @@ return {
         end,
       })
       vim.diagnostic.config({
-        virtual_text = {
-          prefix = '●', -- Character shown before the virtual text
-        },
-        signs = true, -- This displays the "E", "W", etc. in the sign column
+        virtual_text = false, -- Disable inline text that goes off-screen
+        signs = true,
         severity_sort = true,
         float = {
-          source = 'always', -- Shows which LSP or linter produced the diagnostic
+          source = 'always',
+          border = 'rounded',
+          focusable = false,
+          max_width = 80, -- Prevents float from going off-screen
+          header = '',
+          prefix = '',
         },
+        update_in_insert = false,
       })
+
+      -- Keymap to show diagnostic float
+      vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostic details' })
+
+      vim.keymap.set('n', '<leader>c', function()
+        local diag = vim.diagnostic.get_next() or vim.diagnostic.get_prev()
+        if diag and diag.message then
+          vim.fn.setreg('+', diag.message) -- Copy to system clipboard
+          print("Copied diagnostic message to clipboard")
+        end
+      end, { desc = "Copy diagnostic message" })
     end
   },
   {
